@@ -1,0 +1,15 @@
+{
+    "version":"1.0",
+	"name": "Memory game",
+    "description": "Memory game",
+    "launch_path": "/index.html",
+	"fullscreen": "false",
+    "icons": {
+        
+		 "128": "/logo.png"
+    },
+	"developer": {
+        "name": "Vishnu Priya Matha"
+    },
+    "default_locale": "en"
+}

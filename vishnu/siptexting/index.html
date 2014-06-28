@@ -1,0 +1,62 @@
+<html>
+  <head>
+    <title>SIP Texting</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
+  </head>
+
+  <body>
+    
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation" style="color:background-color:black;">
+       <a class="navbar-brand center" href="#" style="color:white !important;">SIP TEXTING</a>
+    </nav>
+
+    <!-- Configuration Prompt -->
+    <form id="config-form" action=""  style="margin-top:5em;" class="form">
+      <label>Your Name     <input type="text" name="displayName" placeholder="smriti1346" class="form-control"/></label>
+      <label>SIP URI       <input type="text" name="uri" placeholder="smriti1346@getonsip.com" class="form-control"/></label>
+      <label>Auth Username <input type="text" name="authorizationUser" placeholder="getonsip_smriti1346" class="form-control"/></label>
+      <label>Password      <input type="password" name="password" class="form-control"/></label>
+      <label>WS Server     <input type="text" name="wsServers" placeholder="wss://edge.sip.onsip.com" class="form-control"/></label>
+      <br/>
+      <input type="submit" name="configSubmit" value="Create UA" class="btn btn-primary"/>
+    </form>
+
+    <!-- UA Control Form -->
+    <div id="ua" style="margin-top:5em">
+      <div id="ua-status">Disconnected</div>
+      <button id="ua-register">Register</button>
+      <form id="new-session-form" action="">
+        <label>Enable Video <input type="checkbox" id="ua-video" class="form-control" checked/></label>
+        <label>SIP URI      <input type="text" id="ua-uri" placeholder="will@example.com" class="form-control"/></label>
+        <input type="submit" id="ua-invite-submit" value="Invite" class="btn btn-primary"/>
+        <input type="submit" id="ua-message-submit" value="Begin Chat" class="btn btn-primary"/>
+      </form>
+    </div>
+
+    <ul id="session-list"></ul>
+
+
+    <!-- Templates to clone Sessions and Messages -->
+    <ul id="templates">
+      <li id="session-template" class="template session">
+       <h2><strong class="display-name"></strong> <span class="uri"></span></h2>
+        <button class="green">Green</button>
+        <button class="red">Red</button>
+        <form class="dtmf" action="">
+          <label>DTMF <input type="text" maxlength="1" /></label>
+          <input type="submit" value="Send" />
+        </form>
+        <video autoplay>Video Disabled or Unavailable</video>
+        <ul class="messages"></ul>
+        <form class="message-form" action="">
+          <input type="text" placeholder="Type to send a message"/><input type="submit" value="Send" />
+        </form>
+      </li>
+    </ul>
+
+    <script src="js/sip-0.5.0.js"></script>
+    <script src="js/ua.js"></script>
+
+  </body>
+</html>

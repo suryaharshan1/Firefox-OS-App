@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Memory Game</title>
+    
+    <meta charset="utf-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0,user-scalable=0"> 
+    <script src="js/application.js"></script>
+    <link rel="stylesheet" href="jquery.mobile-1.3.1.min.css" />
+    <script src="jquery-1.7.1.min.js"></script>
+    <script src="jquery.mobile-1.3.1.min.js"></script>
+    <script src="app.js"></script>
+    <script>
+        $(document).ready(function(){
+
+        $("#btnPlay").click(function(){
+        $.mobile.autoInitializePage = true;
+        $.mobile.changePage ($("#play"));
+      });
+
+
+        $("#btnHow").click(function(){
+        $.mobile.autoInitializePage = true;
+        $.mobile.changePage ($("#howPlay"));
+      });
+
+
+        $("#btnAbout").click(function(){
+        $.mobile.autoInitializePage = true;
+        $.mobile.changePage ($("#gameAbout"));
+      });
+
+
+        $("#btnReset").click(function(){
+          newBoard();
+        });
+
+     }); 
+
+   </script>
+
+    <style type="text/css">
+      div#memory_board{
+      /*background:#fff;
+		border:#999 1px solid;*/
+		width:19em;
+		height:22.5em;
+		padding:2px;
+		margin:0px auto;
+      }
+
+      div#memory_board > div{
+        background: url(tile.png) no-repeat;
+        background-size: 100% 100% !important;
+        border:#000 1px solid;
+        width:20%;
+        height:14.5%;
+        float:left;
+        margin:1px;
+        padding:2px;
+        font-size:3em;
+        cursor:pointer;
+        text-align:center;
+        color:white;
+      }
+
+      page{
+        margin:0;
+        padding:0;
+      }
+
+  </style>
+
+
+  <script>
+	
+      var memory_array = ['A','A','B','B','C','C','D','D','E','E','F','F','G','G','H','H','I','I','J','J','K','K','L','L'];
+      var memory_values = [];
+      var memory_tile_ids = [];
+      var tiles_flipped = 0;
+      var count =0;
+      Array.prototype.memory_tile_shuffle = function(){
+          var i = this.length, j, temp;
+          while(--i > 0){
+              j = Math.floor(Math.random() * (i+1));
+              temp = this[j];
+              this[j] = this[i];
+              this[i] = temp;
+          }
+      }
+      
+
+      $("#btnPlay").click(function(){
+
+      function newBoard(){
+
+        tiles_flipped = 0;
+        var output = '';
+          memory_array.memory_tile_shuffle();
+        for(var i = 0; i < memory_array.length; i++){
+          output += '<div id="tile_'+i+'" ontouch="memoryFlipTile(this,\''+memory_array[i]+'\');"></div>';
+        }
+
+        document.getElementById('timer').innerHTML =" ";
+        document.getElementById('memory_board').innerHTML = output;
+      }
+
+
+    });
+   
+      function hideTiles(){
+
+        for(var i = 0; i < memory_array.length; i++){
+          
+          tile.innerHTML = memory_array[i];
+
+          }
+
+      }
+
+   function memoryFlipTile(tile,val){
+        
+        count++;
+        if(tile.innerHTML == "" && memory_values.length < 2){
+          tile.style.background = 'rgba(44, 181, 224, 0.952941)';
+          tile.innerHTML = val;
+          if(memory_values.length == 0){
+            memory_values.push(val);
+            memory_tile_ids.push(tile.id);
+          } else if(memory_values.length == 1){
+            memory_values.push(val);
+            memory_tile_ids.push(tile.id);
+            if(memory_values[0] == memory_values[1]){
+              tiles_flipped += 2;
+              // Clear both arrays
+              memory_values = [];
+                    memory_tile_ids = [];
+              // Check to see if the whole board is cleared
+              if(tiles_flipped == memory_array.length){
+                alert("Board cleared...\n"+"No of clicks :"+count+"\n");
+                //document.getElementById('memory_board').innerHTML = "";
+                $.mobile.changePage ($("#home"));
+                newBoard();
+              }
+            } else {
+              function flip2Back(){
+                  // Flip the 2 tiles back over
+                  var tile_1 = document.getElementById(memory_tile_ids[0]);
+                  var tile_2 = document.getElementById(memory_tile_ids[1]);
+                  tile_1.style.background = 'url(tile.png) no-repeat';
+            //tile_1.style.backgroundSize = 60px 80px;
+                  tile_1.innerHTML = "";
+            tile_2.style.background = 'url(tile.png) no-repeat';
+            //tile_1.style.backgroundSize = 100% 100%
+            
+                  tile_2.innerHTML = "";
+            // Clear both arrays
+            memory_values = [];
+                  memory_tile_ids = [];
+            }
+            setTimeout(flip2Back, 700);
+          }
+        }
+      }
+    }
+
+
+
+    </script>
+
+  </head>
+  
+  <body>
+
+  <!--home page -->
+
+    <div data-role="page" id="home">
+
+
+        <div data-role="header" data-position="fixed" id="header">
+          <h3>MEMORY GAME</h3>  
+        </div><!-- /header -->
+      
+        <div data-role="content">
+            <a href="#" id="btnPlay" data-role="button" class="big">Play</a>
+            <a href="#" id="btnAbout" data-role="button" class="big">About the game</a>
+            <a href="#" id="btnHow" data-role="button" class="big">How to play</a>
+        </div><!-- /content -->
+
+    </div><!-- /page home -->
+
+    <div data-role="page" id="play" data-add-back-btn="true">
+
+      <div data-role="header" id="header">
+        <h1>GAME</h1>
+      </div>
+      
+	  <div data-role="content">
+        <h1></h1>
+
+            <div id="memory_board" class=""></div>
+            <script>newBoard();
+				$("#btnPlay").click(function(){
+
+			for(var i=0;i<24;i++){
+                document.getElementById('tile_'+i).style.background = 'rgba(44, 181, 224, 0.952941)'
+                document.getElementById('tile_'+i).innerHTML = memory_array[i];
+              }  
+            
+            setTimeout(function(){
+            
+
+            for(var i=0;i<24;i++){
+                document.getElementById('tile_'+i).style.background = 'url(tile.png) no-repeat';
+                document.getElementById('tile_'+i).innerHTML = "";
+              }  
+            
+
+            },3000);
+
+
+            });
+			
+			
+			</script>
+
+            <!-- timer for the game-->
+            <div id="timer">CLOCK : 
+            
+            <script>
+            
+           function timer(time,update,complete) {
+            var start = new Date().getTime();
+            var interval = setInterval(function() {
+                var now = time-(new Date().getTime()-start);
+                if( now <= 0) {
+                    clearInterval(interval);
+                    complete();
+                }
+                else update(Math.floor(now/1000));
+            },100); // the smaller this number, the more accurate the timer will be
+            }
+
+            $("#btnPlay").click(function(){
+              document.getElementById('timer').innerHTML ="";
+              timer(
+              120000, // milliseconds
+              function(timeleft) { // called every step to update the visible countdown
+                document.getElementById('timer').innerHTML = timeleft+" second(s) remaining";
+              },
+              function() { // what to do after
+                alert("Time over!");
+                $.mobile.changePage ($("#home"));
+                newBoard();
+              }
+            );
+
+          });
+            </script>
+
+            </div>
+
+
+            </div>
+
+            <a href="#" id="btnReset" data-role="button" class="big">Reset the board</a>
+
+
+      </div>      <!-- end of play page-->
+
+
+
+      <div data-role="page" id="howPlay" data-add-back-btn="true">
+
+  <div data-role="header" id="header">
+    <h1>How to play</h1>
+  </div>
+  <div data-role="content">
+      Click on the cards. Identify the alphabet. Click the next card with the same alphabet, both the cards are now flipped completely if they are the same,else flipped back.The game continues until all the  cards are flipped. 
+  </div>
+
+</div> <!-- /page add-notes -->
+
+
+  <div data-role="page" id="gameAbout" data-add-back-btn="true">
+
+  <div data-role="header" id="header">
+    <h1>About</h1>
+  </div>
+  <div data-role="content">
+      This game improves the concentration power ,your speed,your memory.
+  </div>
+
+</div> <!-- /page add-notes -->
+
+
+  </body>
+</html>

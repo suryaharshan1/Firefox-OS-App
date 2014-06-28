@@ -1,0 +1,14 @@
+
+{
+"name": "sipppee",
+"description": "sippee",
+"launch_path": "/index.html",
+"icons": {"128":
+"/logo.jpg"
+},
+"developer": {
+"name":"rakhi",
+"url":"rakhismile77@gmail.com"
+},
+"default_locale": "en"
+}

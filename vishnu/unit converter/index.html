@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Unit Converter</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <script src="js/application.js"></script>
+    <link href="js/application.js" rel="">
+
+  </head>
+  
+  <body>
+  
+    <!--<h1>UNIT CONVERTER</h1>-->
+
+
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation" style="color:background-color:black;">
+       <a class="navbar-brand center" href="#" style="color:white !important;">UNIT CONVERTER</a>
+    </nav>
+
+    <div class="container" style="margin-top:5em;" >
+
+    <FORM name="property_form" class="form-horizontal">
+
+    <font face="" size=3><b>Property:</b></font>
+
+    
+    <SELECT NAME="the_menu" size=1 onChange="UpdateUnitMenu(this, document.form_A.unit_menu); UpdateUnitMenu(this, document.form_B.unit_menu)" class="form-control">
+      <option>_____________________________
+        <!-- The underscore line above pre-stretches the drop-down menu
+        to a sufficient length -->
+      <option>
+      <option>
+      <option>
+      <option>
+      <option>
+    </SELECT>
+    
+    
+    </FORM>
+
+    <script>
+    <!-- ;
+    // This fragment initializes the property dropdown menu using the data defined
+    // above in the 'Data Definitions' section
+    FillMenuWithArray(document.property_form.the_menu, property);
+
+    //  -->
+    </script>
+
+
+    
+    <FORM name="form_A" onSubmit="return false">
+
+    <font face="arial, helvetica" size=5 color="white"><b>A</b></font>
+
+    <SELECT NAME="unit_menu" class="form-control">
+    <OPTION>------- Select a Property -------
+    <option>
+    <option>
+    <option>
+    <option>
+    <option>
+
+    </SELECT>
+
+    <div>
+    <b class="col-xs-2" style="margin-top:10px">A :</b>
+
+    <div class="col-xs-10" style="margin-top:5px;padding-right:0;">
+    <INPUT TYPE="number" NAME="unit_input" SIZE="20" MAXLENGTH="20" VALUE="" class="form-control">
+    </div>
+    </div>
+
+    <input TYPE="button" name="unit_submit" VALUE="Convert to B" onClick="CalculateUnit(this.form, document.form_B)" class="form-control btn btn-primary" style="margin-top:5px">
+
+    </form>
+    </input>
+
+
+
+    <form name="form_B" onSubmit="return false">
+
+    <font face="arial, helvetica" size=5 color="white"><b>B</b></font>
+
+    <SELECT NAME="unit_menu" class="form-control">
+    <OPTION>------- Select a Property -------
+    <option>
+    <option>
+    <option>
+    <option>
+    <option>
+    </SELECT>
+
+    <div>
+    <b class="col-xs-2" style="margin-top:10px">B : </b>
+
+    <div class="col-xs-10" style="margin-top:5px;padding-right:0;">
+    <INPUT TYPE="number" NAME="unit_input" SIZE="20" MAXLENGTH="20" VALUE="" class="form-control">
+    </div>
+    </div>
+
+
+    <input TYPE="button" name="unit_submit" VALUE="Convert to A" onClick="CalculateUnit(this.form, document.form_A)" class="form-control btn btn-primary" style="margin-top:5px">
+
+    </form>
+
+    <form name="util_form">
+
+    <input TYPE="button" name="clear_form" VALUE=" Clear Form " onClick="ClearForm()" class="form-control btn btn-primary" style="margin-top:5px">
+
+    </form>
+
+
+    </div>
+
+    
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.min.js"></script>
+  
+  </body>
+</html>
